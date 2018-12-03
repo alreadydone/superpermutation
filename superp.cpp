@@ -1,10 +1,22 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 struct Node {
 	int value;
 	Node* next;
 };
+
+int factorial(int n) {
+	if (n <= 0) return 1;
+	int factorial = 1;
+
+	for(int i=2;i<=n;i++) 
+		factorial *= i;
+
+	return factorial;
+}
 
 // rotate and append c nodes from root to the end
 void firstToLast(Node* &root, int c) {
@@ -30,22 +42,28 @@ void firstToLast(Node* &root, int c) {
 	node->next = tail;
 }
 
+void printChain(Node *root) {
+	while(root) {
+		cout << root->value;// << " ";
+		if (!root->next) break;
+		root = root->next;
+	}
+
+	cout << endl;
+}
+
 int main(int argv, char** argc)
 {
-	using namespace std;
 	int n = 4;
 	string result;
 
-	// count factorial of n
-	int factorial = 1;
-	for(int i=2;i<=n;i++) 
-		factorial *= i;
+	int fact = factorial(n);
 	
 	Node* next;
-	Node* last;
 	Node* node = nullptr;
 	Node* root = node;
 
+	// create nodes
 	for(int i=n;i>0;i--) {
 		next = node;
 		node = new Node();
@@ -54,34 +72,25 @@ int main(int argv, char** argc)
 	}
 
 	root = node;
-
 	int sum = n;
 
-	for(int i=1;i<=factorial;i++) {
-		while(node) {
-			cout << node->value;// << " ";
-			if (!node->next) break;
-			node = node->next;
-		}
-
-		cout << endl;
+	for(int i=1;i<=fact;i++) {
+		printChain(root);
 
 		// check divisibility
 		int m = n;
-		int mm = m;
+		int mm = i;
 
 		while (m > 0) {
-			if (i%mm == 0) {
+			if (mm%m == 0) {
 				cout << "==========" << endl;
-				mm *= --m;
+				mm /= m--;
 			} else {
-				sum+=n-m+1;
-				firstToLast(root, n-m+1);
+				sum += n - m + 1;
+				firstToLast(root, n - m + 1);
 				break;
 			}
 		}
-		//*/
-		node = root;
 	}
 
 	cout << "sum=" << sum << endl;

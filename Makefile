@@ -1,5 +1,5 @@
 CC = g++
-OPTS = -std=c++17 -O3
+OPTS = -std=c++17 -O3 -Wall
 all: superp.o 
 	$(CC) $(OPTS) superp.o -o superp
 superp.o: superp.cpp
