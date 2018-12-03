@@ -6,7 +6,7 @@ using namespace std;
 string result = "";
 
 struct Node {
-	int value;
+	string value;
 	Node* next;
 };
 
@@ -45,7 +45,7 @@ void firstToLast(Node* &root, int c) {
 
 	// append the tail to result string
 	while(tail) {
-		result += to_string(tail->value);// << " ";
+		result += tail->value;// << " ";
 		if (!tail->next) break;
 		tail = tail->next;
 	}
@@ -81,14 +81,14 @@ int main(int argc, char* argv[])
 	for(int i=n;i>0;i--) {
 		next = node;
 		node = new Node();
-		node->value = i;
+		node->value = to_string(i);
 		node->next = next;
 	}
 
 	root = node;
 
 	while(node) {
-		result += to_string(node->value);// << " ";
+		result += node->value;// << " ";
 		if (!node->next) break;
 		node = node->next;
 	}
