@@ -3,6 +3,8 @@
 
 using namespace std;
 
+string result = "";
+
 struct Node {
 	int value;
 	Node* next;
@@ -40,6 +42,14 @@ void firstToLast(Node* &root, int c) {
 
 	// append to the end
 	node->next = tail;
+
+	// append the tail to result string
+	while(tail) {
+		result += to_string(tail->value);// << " ";
+		if (!tail->next) break;
+		tail = tail->next;
+	}
+
 }
 
 void printChain(Node *root) {
@@ -55,7 +65,6 @@ void printChain(Node *root) {
 int main(int argv, char** argc)
 {
 	int n = 4;
-	string result;
 
 	int fact = factorial(n);
 	
@@ -72,6 +81,13 @@ int main(int argv, char** argc)
 	}
 
 	root = node;
+
+	while(node) {
+		result += to_string(node->value);// << " ";
+		if (!node->next) break;
+		node = node->next;
+	}
+
 	int sum = n;
 
 	for(int i=1;i<=fact;i++) {
@@ -94,6 +110,7 @@ int main(int argv, char** argc)
 	}
 
 	cout << "sum=" << sum << endl;
+	cout << "string=" << result << endl;
 
 	return 0;
 }
