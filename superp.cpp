@@ -62,9 +62,14 @@ void printChain(Node *root) {
 	cout << endl;
 }
 
-int main(int argv, char** argc)
+int main(int argc, char* argv[])
 {
-	int n = 4;
+	if (argc != 2) {
+		cout << "Usage: " << argv[0] << " number" << endl;
+		return 1;
+	}
+
+	int n = atoi(argv[1]);
 
 	int fact = factorial(n);
 	
