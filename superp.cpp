@@ -10,23 +10,23 @@ struct Node {
 	Node* next;
 };
 
-int factorial(int n) {
+uint factorial(uint n) {
 	if (n <= 0) return 1;
-	int factorial = 1;
+	uint factorial = 1;
 
-	for(int i=2;i<=n;i++) 
+	for(uint i=2;i<=n;i++) 
 		factorial *= i;
 
 	return factorial;
 }
 
 // rotate and append c nodes from head to the end
-void firstToLast(Node* &head, int c) {
+void firstToLast(Node* &head, uint c) {
 	Node* tail = nullptr;
 	Node* node;
 
 	// grow a tail  
-	for(int i=0;i<c;i++) {
+	for(uint i=0;i<c;i++) {
 		node = head;
 		head = head->next;
 		node->next = tail;
@@ -73,21 +73,21 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	int n = atoi(argv[1]);
+	uint n = atoi(argv[1]);
 
 	if (n < 1) {
 		usage(argv[0]);
 		return 1;
 	}
 
-	int f = factorial(n) / n;
+	uint f = factorial(n) / n;
 	
 	Node* next;
 	Node* node = nullptr;
 	Node* head = node;
 
 	// create nodes
-	for(int i=n;i>0;i--) {
+	for(uint i=n;i>0;i--) {
 		next = node;
 		node = new Node();
 		node->value = to_string(i);
@@ -102,20 +102,20 @@ int main(int argc, char* argv[])
 		node = node->next;
 	}
 
-	int len = n;
+	uint len = n;
 
-	for(int i=1;i<=f;i++) {
+	for(uint i=1;i<=f;i++) {
 		// print the ring
 		printChain(head);
 
-		for (int j=1;j<n;j++) {
+		for (uint j=1;j<n;j++) {
 			firstToLast(head, 1);
 			printChain(head);
 			len++;
 		}
 
-		int m = n - 1;
-		int mm = i;
+		uint m = n - 1;
+		uint mm = i;
 		cout << "==========" << endl;
 
 		// check divisibility
