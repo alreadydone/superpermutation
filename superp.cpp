@@ -131,8 +131,8 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	cout << "sum=" << sum << endl;
 	cout << "string=" << result << endl;
+	cout << "sum=" << sum << endl;
 
 	return 0;
 }
