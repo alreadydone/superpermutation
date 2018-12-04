@@ -102,7 +102,7 @@ int main(int argc, char* argv[])
 		node = node->next;
 	}
 
-	int sum = n;
+	int len = n;
 
 	for(int i=1;i<=f;i++) {
 		// print the ring
@@ -111,7 +111,7 @@ int main(int argc, char* argv[])
 		for (int j=1;j<n;j++) {
 			firstToLast(head, 1);
 			printChain(head);
-			sum += 1;
+			len += 1;
 		}
 
 		int m = n - 1;
@@ -124,7 +124,7 @@ int main(int argc, char* argv[])
 				cout << "==========" << endl;
 				mm /= m--;
 			} else {
-				sum += n - m + 1;
+				len += n - m + 1;
 				firstToLast(head, n - m + 1);
 				break;
 			}
@@ -132,7 +132,7 @@ int main(int argc, char* argv[])
 	}
 
 	cout << "string=" << result << endl;
-	cout << "sum=" << sum << endl;
+	cout << "len=" << len << endl;
 
 	return 0;
 }
