@@ -20,20 +20,20 @@ int factorial(int n) {
 	return factorial;
 }
 
-// rotate and append c nodes from root to the end
-void firstToLast(Node* &root, int c) {
+// rotate and append c nodes from head to the end
+void firstToLast(Node* &head, int c) {
 	Node* tail = nullptr;
 	Node* node;
 
 	// grow a tail  
 	for(int i=0;i<c;i++) {
-		node = root;
-		root = root->next;
+		node = head;
+		head = head->next;
 		node->next = tail;
 		tail = node;
 	}
 
-	node = root;
+	node = head;
 
 	// find the end
 	while(node->next) {
@@ -52,11 +52,11 @@ void firstToLast(Node* &root, int c) {
 
 }
 
-void printChain(Node *root) {
-	while(root) {
-		cout << root->value;// << " ";
-		if (!root->next) break;
-		root = root->next;
+void printChain(Node *head) {
+	while(head) {
+		cout << head->value;// << " ";
+		if (!head->next) break;
+		head = head->next;
 	}
 
 	cout << endl;
@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 	
 	Node* next;
 	Node* node = nullptr;
-	Node* root = node;
+	Node* head = node;
 
 	// create nodes
 	for(int i=n;i>0;i--) {
@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
 		node->next = next;
 	}
 
-	root = node;
+	head = node;
 
 	while(node) {
 		result += node->value;// << " ";
@@ -96,7 +96,7 @@ int main(int argc, char* argv[])
 	int sum = n;
 
 	for(int i=1;i<=fact;i++) {
-		printChain(root);
+		printChain(head);
 
 		// check divisibility
 		int m = n;
@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
 				mm /= m--;
 			} else {
 				sum += n - m + 1;
-				firstToLast(root, n - m + 1);
+				firstToLast(head, n - m + 1);
 				break;
 			}
 		}
