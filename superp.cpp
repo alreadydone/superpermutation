@@ -62,14 +62,23 @@ void printChain(Node *head) {
 	cout << endl;
 }
 
+void usage(char* argv) {
+	cout << "Usage: " << argv << " number" << endl;
+}
+
 int main(int argc, char* argv[])
 {
-	if (argc != 2) {
-		cout << "Usage: " << argv[0] << " number" << endl;
+	if (argc != 2 ) {
+		usage(argv[0]);
 		return 1;
 	}
 
 	int n = atoi(argv[1]);
+
+	if (n < 1) {
+		usage(argv[0]);
+		return 1;
+	}
 
 	int f = factorial(n) / n;
 	
