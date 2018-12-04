@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 
 	int n = atoi(argv[1]);
 
-	int fact = factorial(n);
+	int f = factorial(n) / n;
 	
 	Node* next;
 	Node* node = nullptr;
@@ -95,13 +95,21 @@ int main(int argc, char* argv[])
 
 	int sum = n;
 
-	for(int i=1;i<=fact;i++) {
+	for(int i=1;i<=f;i++) {
+		// print the ring
 		printChain(head);
 
-		// check divisibility
-		int m = n;
-		int mm = i;
+		for (int j=1;j<n;j++) {
+			firstToLast(head, 1);
+			printChain(head);
+			sum += 1;
+		}
 
+		int m = n - 1;
+		int mm = i;
+		cout << "==========" << endl;
+
+		// check divisibility
 		while (m > 0) {
 			if (mm%m == 0) {
 				cout << "==========" << endl;
