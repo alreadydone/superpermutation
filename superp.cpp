@@ -10,14 +10,26 @@ struct Node {
 	Node* next;
 };
 
-uint factorial(uint n) {
-	if (n == 0) return 1;
+uint factorial0(uint n) {
 	uint factorial = 1;
 
 	for(uint i=2;i<=n;i++) 
 		factorial *= i;
 
 	return factorial;
+}
+
+uint factorial(uint n) {
+	uint f = 1;
+
+	while (n > 1) {
+		for(uint i=3;i<=n;i+=2) 
+			f *= i;
+		n >>= 1;
+		f <<= n;
+	}
+
+	return f;
 }
 
 // rotate and append c nodes from head to the end
