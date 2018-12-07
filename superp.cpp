@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	uint f = factorial(n) / n;
+	uint f = factorial(n-1);
 	
 	Node* next;
 	Node* node = nullptr;
