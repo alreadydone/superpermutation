@@ -4,41 +4,20 @@
 using namespace std;
 
 string result = "";
+int len = 0;
 
 struct Node {
 	string value;
 	Node* next;
 };
 
-uint factorial0(uint n) {
-	uint factorial = 1;
-
-	for(uint i=2;i<=n;i++) 
-		factorial *= i;
-
-	return factorial;
-}
-
-uint factorial(uint n) {
-	uint f = 1;
-
-	while (n > 1) {
-		for(uint i=3;i<=n;i+=2) 
-			f *= i;
-		n >>= 1;
-		f <<= n;
-	}
-
-	return f;
-}
-
 // rotate and append c nodes from head to the end
-void firstToLast(Node* &head, uint c) {
+void firstToLast(Node* &head, int c) {
 	Node* tail = nullptr;
 	Node* node;
 
 	// grow a tail  
-	for(uint i=0;i<c;i++) {
+	for(int i=0;i<c;i++) {
 		node = head;
 		head = head->next;
 		node->next = tail;
@@ -78,32 +57,62 @@ void usage(char* argv) {
 	cout << "Usage: " << argv << " number" << endl;
 }
 
-int main(int argc, char* argv[])
-{
+void rotateNprint(Node* &head, int n, int k, bool cando) {
+	if (k <= n) {
+		for (int i=0;i<k-1;i++) {
+			rotateNprint(head, n, k+1, true);
+		}
+
+		rotateNprint(head, n, k+1, false);
+
+		if (cando) {
+			printChain(head);
+			firstToLast(head, n-k+2);
+			len += n-k+2;
+
+			for (int j=0;j<n-k+1;j++) {
+				cout << "===========" << endl;
+			}
+		}
+
+	} else {
+		if (cando) {
+			printChain(head);
+			firstToLast(head, 1);
+			len++;
+		}
+	}
+
+}
+
+void processChain(Node* &head, int n) {
+	len = n;
+	rotateNprint(head, n, 1, false);
+	printChain(head);
+	cout << "==============================================" << endl;
+}
+
+int main(int argc, char* argv[]) {
 	if (argc != 2 ) {
 		usage(argv[0]);
 		return 1;
 	}
 
-	uint n = atoi(argv[1]);
+	int n = atoi(argv[1]);
 
 	if (n < 1) {
 		usage(argv[0]);
 		return 1;
 	}
 
-	uint f = factorial(n-1);
-	
 	Node* next;
+	Node* head;
 	Node* node = nullptr;
-	Node* head = node;
 
 	// create nodes
-	for(uint i=n;i>0;i--) {
+	for(int i=n;i>0;i--) {
 		next = node;
-		node = new Node();
-		node->value = to_string(i);
-		node->next = next;
+		node = new Node({to_string(i), next});
 	}
 
 	head = node;
@@ -114,38 +123,11 @@ int main(int argc, char* argv[])
 		node = node->next;
 	}
 
-	uint len = n;
-
-	for(uint i=1;i<=f;i++) {
-		// print the ring
-		printChain(head);
-
-		for (uint j=1;j<n;j++) {
-			firstToLast(head, 1);
-			printChain(head);
-			len++;
-		}
-
-		uint m = n - 1;
-		uint mm = i;
-		cout << "==========" << endl;
-
-		// check divisibility
-		while (m > 0) {
-			if (mm%m == 0) {
-				cout << "==========" << endl;
-				mm /= m--;
-			} else {
-				len += n - m + 1;
-				firstToLast(head, n - m + 1);
-				break;
-			}
-		}
-	}
+	processChain(head, n);
 
 	cout << "string=" << result << endl;
 	cout << "len=" << len << endl;
-
+	
 	return 0;
 }
 
