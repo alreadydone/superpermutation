@@ -5,6 +5,7 @@
 using namespace std;
 
 std::ofstream outfile;
+string spaces;
 
 int len = 0;
 
@@ -40,7 +41,7 @@ void firstToLast(Node* &head, int c) {
 
 	// append the tail to result string
 	while(tail) {
-		outfile << tail->value << " ";
+		outfile << tail->value << spaces;
 		if (!tail->next) break;
 		tail = tail->next;
 	}
@@ -49,7 +50,7 @@ void firstToLast(Node* &head, int c) {
 
 void printChain(Node *head) {
 	while(head) {
-		cout << head->value << " ";
+		cout << head->value << spaces;
 		if (!head->next) break;
 		head = head->next;
 	}
@@ -88,6 +89,15 @@ void rotateNprint(Node* &head, int n, int k, bool cando) {
 }
 
 void processChain(Node* &head, int n) {
+	Node* node = head;
+
+	while(node) {
+		outfile << node->value << spaces;
+		if (!node->next) break;
+		node = node->next;
+	}
+
+
 	len = n;
 	rotateNprint(head, n, 1, false);
 	printChain(head);
@@ -107,10 +117,11 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
+	if (n > 9) spaces = " ";
+
 	outfile.open("superperm-"+to_string(n)+".txt");
 
 	Node* next;
-	Node* head;
 	Node* node = nullptr;
 
 	// create nodes
@@ -119,15 +130,7 @@ int main(int argc, char* argv[]) {
 		node = new Node({to_string(i), next});
 	}
 
-	head = node;
-
-	while(node) {
-		outfile << node->value << " ";
-		if (!node->next) break;
-		node = node->next;
-	}
-
-	processChain(head, n);
+	processChain(node, n);
 
 	outfile.close();
 
