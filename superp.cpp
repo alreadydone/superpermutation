@@ -1,9 +1,11 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
-string result = "";
+std::ofstream outfile;
+
 int len = 0;
 
 struct Node {
@@ -38,7 +40,7 @@ void firstToLast(Node* &head, int c) {
 
 	// append the tail to result string
 	while(tail) {
-		result += tail->value;
+		outfile << tail->value << " ";
 		if (!tail->next) break;
 		tail = tail->next;
 	}
@@ -105,6 +107,8 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
+	outfile.open("superperm-"+to_string(n)+".txt");
+
 	Node* next;
 	Node* head;
 	Node* node = nullptr;
@@ -118,16 +122,16 @@ int main(int argc, char* argv[]) {
 	head = node;
 
 	while(node) {
-		result += node->value;// << " ";
+		outfile << node->value << " ";
 		if (!node->next) break;
 		node = node->next;
 	}
 
 	processChain(head, n);
 
-	cout << "string=" << result << endl;
+	outfile.close();
+
 	cout << "len=" << len << endl;
 	
 	return 0;
 }
-
