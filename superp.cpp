@@ -36,7 +36,7 @@ void firstToLast(Node* &head, int c) {
 
 	// append the tail to result string
 	while(tail) {
-		result += tail->value;// << " ";
+		result += tail->value;
 		if (!tail->next) break;
 		tail = tail->next;
 	}
@@ -45,7 +45,7 @@ void firstToLast(Node* &head, int c) {
 
 void printChain(Node *head) {
 	while(head) {
-		cout << head->value;// << " ";
+		cout << head->value << " ";
 		if (!head->next) break;
 		head = head->next;
 	}
