@@ -16,6 +16,8 @@ void firstToLast(Node* &head, int c) {
 	Node* tail = nullptr;
 	Node* node;
 
+	len += c;
+
 	// grow a tail  
 	for(int i=0;i<c;i++) {
 		node = head;
@@ -68,7 +70,6 @@ void rotateNprint(Node* &head, int n, int k, bool cando) {
 		if (cando) {
 			printChain(head);
 			firstToLast(head, n-k+2);
-			len += n-k+2;
 
 			for (int j=0;j<n-k+1;j++) {
 				cout << "===========" << endl;
@@ -79,7 +80,6 @@ void rotateNprint(Node* &head, int n, int k, bool cando) {
 		if (cando) {
 			printChain(head);
 			firstToLast(head, 1);
-			len++;
 		}
 	}
 
