@@ -47,7 +47,6 @@ void firstToLast(Node* &head, int c) {
 	// append the tail to result string
 	while(tail) {
 		outfile << tail->value << spaces;
-		if (!tail->next) break;
 		tail = tail->next;
 	}
 
