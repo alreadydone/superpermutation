@@ -77,3 +77,4 @@ https://math.stackexchange.com/questions/2088623/bruteforcing-a-keypad-lock/2088
 
 http://oeis.org/A180632
 
+Inspired by https://habr.com/post/431528/
